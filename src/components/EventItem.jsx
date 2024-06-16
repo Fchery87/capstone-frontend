@@ -30,6 +30,19 @@ function EventItem({ event, dispatch }) {
     setEditedEvent((prevEvent) => ({ ...prevEvent, [name]: value }));
   };
 
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  const formatTime = (timeString) => {
+    const [hour, minute] = timeString.split(':');
+    const date = new Date();
+    date.setHours(hour, minute);
+    const options = { hour: '2-digit', minute: '2-digit', hour12: true };
+    return date.toLocaleTimeString(undefined, options);
+  };
+
   return (
     <li>
       {isEditing ? (
@@ -86,7 +99,7 @@ function EventItem({ event, dispatch }) {
         <>
           <h3>{editedEvent.title}</h3>
           <p>{editedEvent.description}</p>
-          <p>{`${editedEvent.date} at ${editedEvent.time}`}</p>
+          <p>{`${formatDate(editedEvent.date)} at ${formatTime(editedEvent.time)}`}</p>
           <p>Location: {editedEvent.location}</p>
           <p>Category: {editedEvent.category}</p>
           {editedEvent.imageUrl && <img src={editedEvent.imageUrl} alt={editedEvent.title} />}

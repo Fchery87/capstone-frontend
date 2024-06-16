@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import API from '../utils/api';
 
 function EventForm({ dispatch }) {
@@ -96,5 +97,9 @@ function EventForm({ dispatch }) {
     </form>
   );
 }
+
+EventForm.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
 
 export default EventForm;

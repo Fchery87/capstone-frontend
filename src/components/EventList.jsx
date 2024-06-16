@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import EventItem from './EventItem.jsx';
 import API from '../utils/api';
 
@@ -24,5 +25,10 @@ function EventList({ events, dispatch }) {
     </ul>
   );
 }
+
+EventList.propTypes = {
+  events: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
 
 export default EventList;

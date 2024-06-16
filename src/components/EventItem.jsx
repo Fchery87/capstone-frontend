@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import API from '../utils/api';
 
 function EventItem({ event, dispatch }) {
@@ -98,5 +99,19 @@ function EventItem({ event, dispatch }) {
     </li>
   );
 }
+
+EventItem.propTypes = {
+  event: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string,
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
 
 export default EventItem;

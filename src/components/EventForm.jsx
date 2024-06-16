@@ -15,6 +15,11 @@ function EventForm({ dispatch }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!newEvent.title || !newEvent.description || !newEvent.date || !newEvent.time || !newEvent.location || !newEvent.category) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
     const formData = new FormData();
     for (const key in newEvent) {
       formData.append(key, newEvent[key]);
@@ -26,7 +31,6 @@ function EventForm({ dispatch }) {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(response.data); // Check the response
       dispatch({ type: 'ADD_EVENT', payload: response.data });
       setNewEvent({
         title: '',
@@ -39,16 +43,7 @@ function EventForm({ dispatch }) {
         creator: 'Admin' // Reset creator
       });
     } catch (error) {
-      if (error.response) {
-        console.error('Error response:', error.response.data);
-        console.error('Error status:', error.response.status);
-        console.error('Error headers:', error.response.headers);
-      } else if (error.request) {
-        console.error('Error request:', error.request);
-      } else {
-        console.error('Error message:', error.message);
-      }
-      console.error('Error config:', error.config);
+      console.error('Error submitting event:', error);
     }
   };
 

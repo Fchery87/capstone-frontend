@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from 'react';
+import { useReducer } from 'react';
 import EventList from './components/EventList.jsx';
 import EventForm from './components/EventForm.jsx';
 import './App.css';

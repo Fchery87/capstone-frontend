@@ -1,12 +1,32 @@
 import { useState } from 'react';
+import API from '../utils/api';
 
 function EventItem({ event, dispatch }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedEvent, setEditedEvent] = useState({ ...event });
 
-  const handleSave = () => {
-    dispatch({ type: 'EDIT_EVENT', payload: editedEvent });
-    setIsEditing(false);
+  const handleSave = async () => {
+    try {
+      const response = await API.put(`/events/${event._id}`, editedEvent);
+      dispatch({ type: 'EDIT_EVENT', payload: response.data });
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Error updating event:', error);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await API.delete(`/events/${event._id}`);
+      dispatch({ type: 'DELETE_EVENT', payload: event._id });
+    } catch (error) {
+      console.error('Error deleting event:', error);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditedEvent((prevEvent) => ({ ...prevEvent, [name]: value }));
   };
 
   return (
@@ -15,40 +35,46 @@ function EventItem({ event, dispatch }) {
         <>
           <input
             type="text"
+            name="title"
             value={editedEvent.title}
-            onChange={(e) => setEditedEvent({ ...editedEvent, title: e.target.value })}
+            onChange={handleInputChange}
             placeholder="Event Title"
             required
           />
           <textarea
+            name="description"
             value={editedEvent.description}
-            onChange={(e) => setEditedEvent({ ...editedEvent, description: e.target.value })}
+            onChange={handleInputChange}
             placeholder="Event Description"
             required
           />
           <input
             type="date"
+            name="date"
             value={editedEvent.date}
-            onChange={(e) => setEditedEvent({ ...editedEvent, date: e.target.value })}
+            onChange={handleInputChange}
             required
           />
           <input
             type="time"
+            name="time"
             value={editedEvent.time}
-            onChange={(e) => setEditedEvent({ ...editedEvent, time: e.target.value })}
+            onChange={handleInputChange}
             required
           />
           <input
             type="text"
+            name="location"
             value={editedEvent.location}
-            onChange={(e) => setEditedEvent({ ...editedEvent, location: e.target.value })}
+            onChange={handleInputChange}
             placeholder="Event Location"
             required
           />
           <input
             type="text"
+            name="category"
             value={editedEvent.category}
-            onChange={(e) => setEditedEvent({ ...editedEvent, category: e.target.value })}
+            onChange={handleInputChange}
             placeholder="Event Category"
             required
           />
@@ -57,19 +83,15 @@ function EventItem({ event, dispatch }) {
         </>
       ) : (
         <>
-          <h3>{event.title}</h3>
-          <p>{event.description}</p>
-          <p>{event.date} at {event.time}</p>
-          <p>Location: {event.location}</p>
-          <p>Category: {event.category}</p>
-          {event.imageUrl && <img src={event.imageUrl} alt={event.title} />}
+          <h3>{editedEvent.title}</h3>
+          <p>{editedEvent.description}</p>
+          <p>{`${editedEvent.date} at ${editedEvent.time}`}</p>
+          <p>Location: {editedEvent.location}</p>
+          <p>Category: {editedEvent.category}</p>
+          {editedEvent.imageUrl && <img src={editedEvent.imageUrl} alt={editedEvent.title} />}
           <div className="buttons">
             <button onClick={() => setIsEditing(true)}>Edit</button>
-            <button
-              onClick={() => dispatch({ type: 'DELETE_EVENT', payload: event.id })}
-            >
-              Delete
-            </button>
+            <button onClick={handleDelete}>Delete</button>
           </div>
         </>
       )}

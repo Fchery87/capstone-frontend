@@ -31,15 +31,16 @@ function EventItem({ event, dispatch }) {
   };
 
   const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+    const date = new Date(dateString);
+    const options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
+    return date.toLocaleDateString(undefined, options).toUpperCase();
   };
 
   const formatTime = (timeString) => {
     const [hour, minute] = timeString.split(':');
     const date = new Date();
     date.setHours(hour, minute);
-    const options = { hour: '2-digit', minute: '2-digit', hour12: true };
+    const options = { hour: 'numeric', minute: 'numeric', hour12: true };
     return date.toLocaleTimeString(undefined, options);
   };
 
@@ -65,7 +66,7 @@ function EventItem({ event, dispatch }) {
           <input
             type="date"
             name="date"
-            value={editedEvent.date}
+            value={editedEvent.date.split('T')[0]}
             onChange={handleInputChange}
             required
           />
@@ -99,7 +100,7 @@ function EventItem({ event, dispatch }) {
         <>
           <h3>{editedEvent.title}</h3>
           <p>{editedEvent.description}</p>
-          <p>{`${formatDate(editedEvent.date)} at ${formatTime(editedEvent.time)}`}</p>
+          <p>{`${formatDate(editedEvent.date)} · ${formatTime(editedEvent.time)}`}</p>
           <p>Location: {editedEvent.location}</p>
           <p>Category: {editedEvent.category}</p>
           {editedEvent.imageUrl && <img src={editedEvent.imageUrl} alt={editedEvent.title} />}

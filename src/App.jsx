@@ -2,7 +2,6 @@ import { useReducer } from 'react';
 import EventList from './components/EventList.jsx';
 import EventForm from './components/EventForm.jsx';
 import './App.css';
-import logo from './assets/capsule-logo.png'; // Import the logo
 
 const initialState = [];
 
@@ -28,9 +27,9 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} alt="Capsule Logo" className="App-logo" />
-      </header>
+      <div className="App-header">
+        <img src="/src/assets/capsule-logo.png" className="App-logo" alt="Capsule Event Hub Logo" />
+      </div>
       <EventForm dispatch={dispatch} />
       <EventList events={events} dispatch={dispatch} />
     </div>

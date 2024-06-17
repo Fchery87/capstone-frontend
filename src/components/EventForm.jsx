@@ -17,7 +17,7 @@ function EventForm({ dispatch }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!newEvent.title || !newEvent.description || !newEvent.date || !newEvent.time || !newEvent.location || !newEvent.category) {
-      alert('Please fill in all fields.');
+      alert('Please fill in all required fields.');
       return;
     }
 
@@ -48,49 +48,64 @@ function EventForm({ dispatch }) {
     }
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewEvent((prevEvent) => ({
+      ...prevEvent,
+      [name]: value,
+    }));
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <input
         type="text"
+        name="title"
         value={newEvent.title}
-        onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
+        onChange={handleInputChange}
         placeholder="Event Title"
         required
       />
       <textarea
+        name="description"
         value={newEvent.description}
-        onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
+        onChange={handleInputChange}
         placeholder="Event Description"
         required
       />
       <input
         type="date"
+        name="date"
         value={newEvent.date}
-        onChange={(e) => setNewEvent({ ...newEvent, date: e.target.value })}
+        onChange={handleInputChange}
         required
       />
       <input
         type="time"
+        name="time"
         value={newEvent.time}
-        onChange={(e) => setNewEvent({ ...newEvent, time: e.target.value })}
+        onChange={handleInputChange}
         required
       />
       <input
         type="text"
+        name="location"
         value={newEvent.location}
-        onChange={(e) => setNewEvent({ ...newEvent, location: e.target.value })}
+        onChange={handleInputChange}
         placeholder="Event Location"
         required
       />
       <input
         type="text"
+        name="category"
         value={newEvent.category}
-        onChange={(e) => setNewEvent({ ...newEvent, category: e.target.value })}
+        onChange={handleInputChange}
         placeholder="Event Category"
         required
       />
       <input
         type="file"
+        name="image"
         onChange={(e) => setNewEvent({ ...newEvent, image: e.target.files[0] })}
       />
       <button type="submit">Create Event</button>

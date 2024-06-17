@@ -2,7 +2,7 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #b4cccc; /* Dark blue background similar to the logo */
   }
   
   .App {
@@ -17,12 +17,12 @@ body {
   }
   
   .App-logo {
-    max-width: 200px; /* Adjust size as needed */
+    max-width: 300px; /* Adjust size as needed */
     height: auto;
   }
   
   form {
-    background: #fff;
+    background: #f9f9f9; /* Light background for contrast */
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
@@ -39,10 +39,12 @@ body {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: #e6e8eb; /* Light grey similar to logo's light tones */
+    color: #1c1f24; /* Dark text color for contrast */
   }
   
   button {
-    background-color: #007bff;
+    background-color: #4f6d7a; /* Earthy green tone similar to the leaves in the logo */
     color: white;
     padding: 10px 20px;
     border: none;
@@ -51,7 +53,7 @@ body {
   }
   
   button:hover {
-    background-color: #0056b3;
+    background-color: #3b4f5a; /* Slightly darker shade for hover effect */
   }
   
   ul {
@@ -60,7 +62,7 @@ body {
   }
   
   li {
-    background: #fff;
+    background: #f9f9f9; /* Light background for list items */
     margin-bottom: 10px;
     padding: 20px;
     border-radius: 5px;

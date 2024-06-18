@@ -1,6 +1,9 @@
 import { useReducer } from 'react';
+import { Route, Routes, Link } from 'react-router-dom';
 import EventList from './components/EventList.jsx';
 import EventForm from './components/EventForm.jsx';
+import EventDetails from './components/EventDetails.jsx'; 
+import Home from './components/Home.jsx'; 
 import './App.css';
 
 const initialState = [];
@@ -26,13 +29,26 @@ function App() {
   const [events, dispatch] = useReducer(eventReducer, initialState);
 
   return (
-    <div className="App">
-      <div className="App-header">
-        <img src="/src/assets/capsule-logo.png" className="App-logo" alt="Capsule Event Hub Logo" />
+    // <Router>
+      <div className="App">
+        <div className="App-header">
+          <img src="/src/assets/capsule-logo.png" className="App-logo" alt="Capsule Event Hub Logo" />
+          <nav>
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/events">Events</Link></li>
+              <li><Link to="/create">Create Event</Link></li>
+            </ul>
+          </nav>
+        </div>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/events" element={<EventList events={events} dispatch={dispatch} />} />
+          <Route path="/create" element={<EventForm dispatch={dispatch} />} />
+          <Route path="/event/:id" element={<EventDetails />} />
+        </Routes>
       </div>
-      <EventForm dispatch={dispatch} />
-      <EventList events={events} dispatch={dispatch} />
-    </div>
+    // </Router>
   );
 }
 

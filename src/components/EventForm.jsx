@@ -13,11 +13,12 @@ function EventForm({ dispatch }) {
     image: null,
     creator: 'Admin' // Placeholder creator
   });
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!newEvent.title || !newEvent.description || !newEvent.date || !newEvent.time || !newEvent.location || !newEvent.category) {
-      alert('Please fill in all required fields.');
+      setError('Please fill in all required fields.');
       return;
     }
 
@@ -43,8 +44,9 @@ function EventForm({ dispatch }) {
         image: null,
         creator: 'Admin' // Reset creator
       });
+      setError(null);
     } catch (error) {
-      console.error('Error submitting event:', error);
+      setError('Error submitting event: ' + error.message);
     }
   };
 
@@ -58,6 +60,7 @@ function EventForm({ dispatch }) {
 
   return (
     <form onSubmit={handleSubmit}>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <input
         type="text"
         name="title"

@@ -4,6 +4,7 @@ import EventList from './components/EventList.jsx';
 import EventForm from './components/EventForm.jsx';
 import EventDetails from './components/EventDetails.jsx'; 
 import Home from './components/Home.jsx'; 
+import logo from './assets/capsule-logo-1.png'
 import './App.css';
 
 const initialState = [];
@@ -32,7 +33,7 @@ function App() {
     // <Router>
       <div className="App">
         <div className="App-header">
-          <img src="/src/assets/capsule-logo.png" className="App-logo" alt="Capsule Event Hub Logo" />
+          <img src={ logo } className="App-logo" alt="Capsule Event Hub Logo" />
           <nav>
             <ul>
               <li><Link to="/">Home</Link></li>

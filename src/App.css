@@ -4,6 +4,43 @@ body {
     padding: 0;
     background-color: #b4cccc; /* Dark blue background similar to the logo */
   }
+
+  .App-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .App-header nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .App-header nav ul li {
+    display: inline;
+    margin-right: 10px;
+  }
+  
+  .auth-buttons {
+    display: inline-block;
+    margin-top: 10px;
+  }
+  
+  .auth-button {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 10px 20px;
+    background-color: #4f6d7a; /* Button color */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .auth-button:hover {
+    background-color: #3b4f5a; /* Hover color */
+  }
+  
   
   .App {
     max-width: 1200px;

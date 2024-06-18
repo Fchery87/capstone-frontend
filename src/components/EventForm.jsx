@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import API from '../utils/api';
 
 function EventForm({ dispatch }) {
@@ -45,8 +47,10 @@ function EventForm({ dispatch }) {
         creator: 'Admin' // Reset creator
       });
       setError(null);
+      toast.success('Event created successfully!');
     } catch (error) {
       setError('Error submitting event: ' + error.message);
+      toast.error('Error creating event. Please try again.');
     }
   };
 
@@ -59,60 +63,63 @@ function EventForm({ dispatch }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <input
-        type="text"
-        name="title"
-        value={newEvent.title}
-        onChange={handleInputChange}
-        placeholder="Event Title"
-        required
-      />
-      <textarea
-        name="description"
-        value={newEvent.description}
-        onChange={handleInputChange}
-        placeholder="Event Description"
-        required
-      />
-      <input
-        type="date"
-        name="date"
-        value={newEvent.date}
-        onChange={handleInputChange}
-        required
-      />
-      <input
-        type="time"
-        name="time"
-        value={newEvent.time}
-        onChange={handleInputChange}
-        required
-      />
-      <input
-        type="text"
-        name="location"
-        value={newEvent.location}
-        onChange={handleInputChange}
-        placeholder="Event Location"
-        required
-      />
-      <input
-        type="text"
-        name="category"
-        value={newEvent.category}
-        onChange={handleInputChange}
-        placeholder="Event Category"
-        required
-      />
-      <input
-        type="file"
-        name="image"
-        onChange={(e) => setNewEvent({ ...newEvent, image: e.target.files[0] })}
-      />
-      <button type="submit">Create Event</button>
-    </form>
+    <div>
+      <ToastContainer />
+      <form onSubmit={handleSubmit}>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <input
+          type="text"
+          name="title"
+          value={newEvent.title}
+          onChange={handleInputChange}
+          placeholder="Event Title"
+          required
+        />
+        <textarea
+          name="description"
+          value={newEvent.description}
+          onChange={handleInputChange}
+          placeholder="Event Description"
+          required
+        />
+        <input
+          type="date"
+          name="date"
+          value={newEvent.date}
+          onChange={handleInputChange}
+          required
+        />
+        <input
+          type="time"
+          name="time"
+          value={newEvent.time}
+          onChange={handleInputChange}
+          required
+        />
+        <input
+          type="text"
+          name="location"
+          value={newEvent.location}
+          onChange={handleInputChange}
+          placeholder="Event Location"
+          required
+        />
+        <input
+          type="text"
+          name="category"
+          value={newEvent.category}
+          onChange={handleInputChange}
+          placeholder="Event Category"
+          required
+        />
+        <input
+          type="file"
+          name="image"
+          onChange={(e) => setNewEvent({ ...newEvent, image: e.target.files[0] })}
+        />
+        <button type="submit">Create Event</button>
+      </form>
+    </div>
   );
 }
 

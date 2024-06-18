@@ -1,10 +1,15 @@
 import { useReducer } from 'react';
 import { Route, Routes, Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import EventList from './components/EventList.jsx';
 import EventForm from './components/EventForm.jsx';
 import EventDetails from './components/EventDetails.jsx'; 
 import Home from './components/Home.jsx'; 
-import logo from './assets/capsule-logo-1.png'
+import LoginForm from './components/LoginForm.jsx';
+import RegisterForm from './components/RegisterForm.jsx';
+import WeatherForecast from './components/WeatherForecast.jsx';
+import logo from './assets/capsule-logo-1.png';
 import './App.css';
 
 const initialState = [];
@@ -30,26 +35,33 @@ function App() {
   const [events, dispatch] = useReducer(eventReducer, initialState);
 
   return (
-    // <Router>
-      <div className="App">
-        <div className="App-header">
-          <img src={ logo } className="App-logo" alt="Capsule Event Hub Logo" />
-          <nav>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/events">Events</Link></li>
-              <li><Link to="/create">Create Event</Link></li>
-            </ul>
-          </nav>
-        </div>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route path="/events" element={<EventList events={events} dispatch={dispatch} />} />
-          <Route path="/create" element={<EventForm dispatch={dispatch} />} />
-          <Route path="/event/:id" element={<EventDetails />} />
-        </Routes>
+    <div className="App">
+      <div className="App-header">
+        <img src={logo} className="App-logo" alt="Capsule Event Hub Logo" />
+        <nav>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/events">Events</Link></li>
+            <li><Link to="/create">Create Event</Link></li>
+            <li><Link to="/weather">Weather</Link></li> {/* Add this line */}
+          </ul>
+          <div className="auth-buttons">
+            <Link to="/login" className="auth-button">Login</Link>
+            <Link to="/register" className="auth-button">Register</Link>
+          </div>
+        </nav>
       </div>
-    // </Router>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/events" element={<EventList events={events} dispatch={dispatch} />} />
+        <Route path="/create" element={<EventForm dispatch={dispatch} />} />
+        <Route path="/event/:id" element={<EventDetails />} />
+        <Route path="/login" element={<LoginForm dispatch={dispatch} />} />
+        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/weather" element={<WeatherForecast />} /> {/* Add this line */}
+      </Routes>
+      <ToastContainer />
+    </div>
   );
 }
 

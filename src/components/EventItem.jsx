@@ -1,18 +1,26 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 import API from '../utils/api';
 
 function EventItem({ event, dispatch }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedEvent, setEditedEvent] = useState({ ...event });
+  const [isSaving, setIsSaving] = useState(false);
 
   const handleSave = async () => {
+    if (isSaving) return; // Prevent duplicate save attempts
+    setIsSaving(true);
     try {
       const response = await API.put(`/events/${event._id}`, editedEvent);
       dispatch({ type: 'EDIT_EVENT', payload: response.data });
       setIsEditing(false);
+      toast.success('Event updated successfully!');
     } catch (error) {
       console.error('Error updating event:', error);
+      toast.error('Error updating event. Please try again.');
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -20,8 +28,10 @@ function EventItem({ event, dispatch }) {
     try {
       await API.delete(`/events/${event._id}`);
       dispatch({ type: 'DELETE_EVENT', payload: event._id });
+      toast.success('Event deleted successfully!');
     } catch (error) {
       console.error('Error deleting event:', error);
+      toast.error('Error deleting event. Please try again.');
     }
   };
 

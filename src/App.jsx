@@ -37,19 +37,19 @@ function App() {
   return (
     <div className="App">
       <div className="App-header">
-        <img src={logo} className="App-logo" alt="Capsule Event Hub Logo" />
         <nav>
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/events">Events</Link></li>
             <li><Link to="/create">Create Event</Link></li>
-            <li><Link to="/weather">Weather</Link></li> 
+            <li><Link to="/weather">Weather</Link></li>
           </ul>
-          <div className="auth-buttons">
-            <Link to="/login" className="auth-button">Login</Link>
-            <Link to="/register" className="auth-button">Register</Link>
-          </div>
         </nav>
+        <img src={logo} className="App-logo" alt="Capsule Event Hub Logo" />
+        <div className="auth-buttons">
+          <Link to="/login" className="auth-button">Login</Link>
+          <Link to="/register" className="auth-button">Register</Link>
+        </div>
       </div>
       <Routes>
         <Route exact path="/" element={<Home />} />

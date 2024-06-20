@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import EventItem from './EventItem.jsx';
 import API from '../utils/api';
@@ -18,7 +18,7 @@ function EventList({ events, dispatch }) {
   }, [dispatch]);
 
   return (
-    <ul>
+    <ul className="event-list">
       {events.map(event => (
         <EventItem key={event._id} event={event} dispatch={dispatch} />
       ))}

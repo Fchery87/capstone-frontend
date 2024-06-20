@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import API from '../utils/api';
+import '../styling/EventItem.css'; // Import the new CSS file
 
 function EventItem({ event, dispatch }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -74,7 +75,7 @@ function EventItem({ event, dispatch }) {
   };
 
   return (
-    <li>
+    <li className="event-item">
       {isEditing ? (
         <>
           <input
@@ -111,6 +112,7 @@ function EventItem({ event, dispatch }) {
             name="endTime"
             value={editedEvent.endTime || ''}
             onChange={handleInputChange}
+            placeholder="End Time"
           />
           <input
             type="text"
@@ -137,19 +139,20 @@ function EventItem({ event, dispatch }) {
           <button onClick={() => setIsEditing(false)}>Cancel</button>
         </>
       ) : (
-        <>
-          <h3>{editedEvent.title}</h3>
-          <p>{editedEvent.description}</p>
-          <p>{`${formatDate(editedEvent.date)} · ${formatTime(editedEvent.time)}`}</p>
-          {editedEvent.endTime && <p>End Time: {formatTime(editedEvent.endTime)}</p>}
-          <p>Location: {editedEvent.location}</p>
-          <p>Category: {editedEvent.category}</p>
-          {editedEvent.imageUrl && <img src={editedEvent.imageUrl} alt={editedEvent.title} />}
+        <div className="event-item-content">
+          <div className="event-details">
+            <h3>{editedEvent.title}</h3>
+            <p>{editedEvent.description}</p>
+            <p>{`${formatDate(editedEvent.date)} · ${formatTime(editedEvent.time)}${editedEvent.endTime ? ` - ${formatTime(editedEvent.endTime)}` : ''}`}</p>
+            <p>Location: {editedEvent.location}</p>
+            <p>Category: {editedEvent.category}</p>
+          </div>
+          {editedEvent.imageUrl && <img src={editedEvent.imageUrl} alt={editedEvent.title} className="event-image" />}
           <div className="buttons">
             <button onClick={() => setIsEditing(true)}>Edit</button>
             <button onClick={handleDelete}>Delete</button>
           </div>
-        </>
+        </div>
       )}
     </li>
   );
@@ -162,7 +165,7 @@ EventItem.propTypes = {
     description: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
-    endTime: PropTypes.string, // Optional field
+    endTime: PropTypes.string,
     location: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     imageUrl: PropTypes.string,

@@ -1,149 +1,196 @@
+/* Importing Lato font */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #b4cccc; /* Dark blue background similar to the logo */
+  font-family: 'Lato', sans-serif; /* Applying Lato font */
+  margin: 0;
+  padding: 0;
+  background-color: #ebf6f5; /* Teeny Greeny background */
+}
+
+.App-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #5cbdb9; /* Blue Greeny header */
+}
+
+.App-header nav {
+  display: flex;
+  align-items: center;
+}
+
+.App-header nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.App-header nav ul li {
+  margin-right: 10px;
+}
+
+.App-header nav ul li a {
+  padding: 5px 10px;
+  background-color: #fbe3e8; /* Pinky button */
+  color: #41938f;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effects */
+}
+
+.App-header nav ul li a:hover {
+  background-color: #e0a9b2; /* Slightly darker Pinky for hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-button {
+  padding: 10px 20px;
+  background-color: #fbe3e8; /* Pinky button */
+  color: #41938f;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effects */
+}
+
+.auth-button:hover {
+  background-color: #e0a9b2; /* Slightly darker Pinky for hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.App-logo {
+  max-width: 200px; /* Adjust size as needed */
+  height: auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+form {
+  background: #ffffff; /* White form background */
+  padding: 30px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea,
+input[type="file"] {
+  font-family: 'Lato', sans-serif; /* Applying Lato font */
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fbe3e8; /* Pinky for form fields */
+  color: #1c1f24; /* Dark text color for contrast */
+}
+
+::placeholder {
+  font-family: 'Lato', sans-serif; /* Applying Lato font to placeholders */
+  color: #a3a3a3; /* Light grey color for placeholders */
+}
+
+button {
+  background-color: #5cbdb9; /* Blue Greeny button */
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px; /* Added margin for better spacing */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effects */
+}
+
+button:hover {
+  background-color: #4fa8a6; /* Slightly darker Blue Greeny for hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background: #ffffff; /* White background for list items */
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; /* Added gap for better spacing */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto; /* Centering the image */
+}
+
+@media (min-width: 600px) {
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Added gap for better spacing */
   }
 
-  .App-header {
-    text-align: center;
-    margin-bottom: 20px;
+  form > * {
+    flex: 1 1 48%;
   }
-  
-  .App-header nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .App-header nav ul li {
-    display: inline;
-    margin-right: 10px;
-  }
-  
-  .auth-buttons {
-    display: inline-block;
-    margin-top: 10px;
-  }
-  
-  .auth-button {
-    display: inline-block;
-    margin: 0 10px;
-    padding: 10px 20px;
-    background-color: #4f6d7a; /* Button color */
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .auth-button:hover {
-    background-color: #3b4f5a; /* Hover color */
-  }
-  
-  
-  .App {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .App-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .App-logo {
-    max-width: 300px; /* Adjust size as needed */
-    height: auto;
-  }
-  
-  form {
-    background: #f9f9f9; /* Light background for contrast */
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  input[type="text"],
-  input[type="date"],
-  input[type="time"],
-  textarea,
-  input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #e6e8eb; /* Light grey similar to logo's light tones */
-    color: #1c1f24; /* Dark text color for contrast */
-  }
-  
+
+  input[type="file"],
   button {
-    background-color: #4f6d7a; /* Earthy green tone similar to the leaves in the logo */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    flex: 1 1 100%;
   }
-  
-  button:hover {
-    background-color: #3b4f5a; /* Slightly darker shade for hover effect */
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
+
   li {
-    background: #f9f9f9; /* Light background for list items */
-    margin-bottom: 10px;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .buttons {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
   }
-  
-  img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
+
+  .buttons {
+    flex-direction: row;
   }
-  
-  @media (min-width: 600px) {
-    form {
-      display: flex;
-      flex-wrap: wrap;
-    }
-  
-    form > * {
-      flex: 1 1 48%;
-      margin-right: 2%;
-    }
-  
-    form > *:nth-child(2n) {
-      margin-right: 0;
-    }
-  
-    input[type="file"],
-    button {
-      flex: 1 1 100%;
-    }
-  
-    li {
-      display: flex;
-      flex-direction: column;
-    }
-  
-    .buttons {
-      flex-direction: row;
-    }
+}
+
+.event-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.event-item {
+  flex: 1 1 calc(50% - 20px); /* Two columns with 20px gap */
+  box-sizing: border-box;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .event-item {
+    flex: 1 1 100%; /* Single column on smaller screens */
   }
-  
+}

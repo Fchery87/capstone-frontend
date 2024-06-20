@@ -1,3 +1,4 @@
+// Importing necessary tools and components
 import { useReducer } from 'react';
 import { Route, Routes, Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -12,8 +13,10 @@ import WeatherForecast from './components/WeatherForecast.jsx';
 import logo from './assets/capsule-logo-1.png';
 import './App.css';
 
+// Initial state for events
 const initialState = [];
 
+// Reducer function to manage events state
 function eventReducer(state, action) {
   switch (action.type) {
     case 'SET_EVENTS':
@@ -31,11 +34,14 @@ function eventReducer(state, action) {
   }
 }
 
+// Main App component
 function App() {
+  // Using useReducer to manage the events state
   const [events, dispatch] = useReducer(eventReducer, initialState);
 
   return (
     <div className="App">
+      {/* Header with navigation and logo */}
       <div className="App-header">
         <nav>
           <ul>
@@ -51,6 +57,7 @@ function App() {
           <Link to="/register" className="auth-button">Register</Link>
         </div>
       </div>
+      {/* Routes to different components/pages */}
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/events" element={<EventList events={events} dispatch={dispatch} />} />
@@ -60,9 +67,11 @@ function App() {
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/weather" element={<WeatherForecast />} /> 
       </Routes>
+      {/* ToastContainer to show notifications */}
       <ToastContainer />
     </div>
   );
 }
 
+// Export the App component so it can be used in other parts of the app
 export default App;

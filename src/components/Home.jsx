@@ -1,3 +1,4 @@
+// The Home component displays a welcome message
 const Home = () => {
   return (
     <div>

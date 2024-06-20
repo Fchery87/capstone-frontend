@@ -10,6 +10,7 @@ function EventForm({ dispatch }) {
     description: '',
     date: '',
     time: '',
+    endTime: '',
     location: '',
     category: '',
     image: null,
@@ -41,6 +42,7 @@ function EventForm({ dispatch }) {
         description: '',
         date: '',
         time: '',
+        endTime: '',
         location: '',
         category: '',
         image: null,
@@ -95,6 +97,13 @@ function EventForm({ dispatch }) {
           value={newEvent.time}
           onChange={handleInputChange}
           required
+        />
+        <input
+          type="time"
+          name="endTime"
+          value={newEvent.endTime}
+          onChange={handleInputChange}
+          placeholder="End Time"
         />
         <input
           type="text"

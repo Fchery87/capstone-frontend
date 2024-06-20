@@ -6,13 +6,28 @@ import API from '../utils/api';
 function EventItem({ event, dispatch }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedEvent, setEditedEvent] = useState({ ...event });
+  const [newImage, setNewImage] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
 
   const handleSave = async () => {
     if (isSaving) return; // Prevent duplicate save attempts
     setIsSaving(true);
+
     try {
-      const response = await API.put(`/events/${event._id}`, editedEvent);
+      const formData = new FormData();
+      for (const key in editedEvent) {
+        formData.append(key, editedEvent[key]);
+      }
+      if (newImage) {
+        formData.append('image', newImage);
+      }
+
+      const response = await API.put(`/events/${event._id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
       dispatch({ type: 'EDIT_EVENT', payload: response.data });
       setIsEditing(false);
       toast.success('Event updated successfully!');
@@ -38,6 +53,10 @@ function EventItem({ event, dispatch }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEditedEvent((prevEvent) => ({ ...prevEvent, [name]: value }));
+  };
+
+  const handleFileChange = (e) => {
+    setNewImage(e.target.files[0]);
   };
 
   const formatDate = (dateString) => {
@@ -88,6 +107,12 @@ function EventItem({ event, dispatch }) {
             required
           />
           <input
+            type="time"
+            name="endTime"
+            value={editedEvent.endTime || ''}
+            onChange={handleInputChange}
+          />
+          <input
             type="text"
             name="location"
             value={editedEvent.location}
@@ -103,6 +128,11 @@ function EventItem({ event, dispatch }) {
             placeholder="Event Category"
             required
           />
+          <input
+            type="file"
+            name="image"
+            onChange={handleFileChange}
+          />
           <button onClick={handleSave}>Save</button>
           <button onClick={() => setIsEditing(false)}>Cancel</button>
         </>
@@ -111,6 +141,7 @@ function EventItem({ event, dispatch }) {
           <h3>{editedEvent.title}</h3>
           <p>{editedEvent.description}</p>
           <p>{`${formatDate(editedEvent.date)} · ${formatTime(editedEvent.time)}`}</p>
+          {editedEvent.endTime && <p>End Time: {formatTime(editedEvent.endTime)}</p>}
           <p>Location: {editedEvent.location}</p>
           <p>Category: {editedEvent.category}</p>
           {editedEvent.imageUrl && <img src={editedEvent.imageUrl} alt={editedEvent.title} />}
@@ -131,6 +162,7 @@ EventItem.propTypes = {
     description: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
+    endTime: PropTypes.string, // Optional field
     location: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     imageUrl: PropTypes.string,

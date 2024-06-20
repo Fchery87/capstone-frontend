@@ -43,7 +43,7 @@ function App() {
             <li><Link to="/">Home</Link></li>
             <li><Link to="/events">Events</Link></li>
             <li><Link to="/create">Create Event</Link></li>
-            <li><Link to="/weather">Weather</Link></li> {/* Add this line */}
+            <li><Link to="/weather">Weather</Link></li> 
           </ul>
           <div className="auth-buttons">
             <Link to="/login" className="auth-button">Login</Link>
@@ -58,7 +58,7 @@ function App() {
         <Route path="/event/:id" element={<EventDetails />} />
         <Route path="/login" element={<LoginForm dispatch={dispatch} />} />
         <Route path="/register" element={<RegisterForm />} />
-        <Route path="/weather" element={<WeatherForecast />} /> {/* Add this line */}
+        <Route path="/weather" element={<WeatherForecast />} /> 
       </Routes>
       <ToastContainer />
     </div>
